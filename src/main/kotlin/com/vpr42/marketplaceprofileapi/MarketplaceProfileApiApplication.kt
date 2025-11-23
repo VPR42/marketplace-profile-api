@@ -1,11 +1,11 @@
-package com.vpr42.kotlintemplaterepository
+package com.vpr42.marketplaceprofileapi
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class KotlinTemplateRepositoryApplication
+class MarketplaceProfileApiApplication
 
 fun main(args: Array<String>) {
-    runApplication<KotlinTemplateRepositoryApplication>(*args)
+    runApplication<MarketplaceProfileApiApplication>(*args)
 }
