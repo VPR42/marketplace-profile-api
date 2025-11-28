@@ -4,6 +4,20 @@ logging:
 spring:
   application:
     name: marketplace-profile-api
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://kinoko.su:5432/mp_db_dev
+    username: mp_dev_user
+    password: mp_dev_passwd
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api/profile/docs
+  swagger-ui:
+    csrf:
+      enabled: true
+    path: /api/profile/swagger
 
 server:
   port: 33302
