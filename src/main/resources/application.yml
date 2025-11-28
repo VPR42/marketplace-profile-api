@@ -1,9 +1,18 @@
 logging:
   config: 'classpath:log4j2.yml'
+  level:
+    com.netflix.discovery.shared: error
 
 spring:
   application:
     name: marketplace-profile-api
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://marketplace-eureka:33307/eureka
 
 server:
   port: 33302

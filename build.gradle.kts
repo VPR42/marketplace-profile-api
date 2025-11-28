@@ -28,6 +28,9 @@ dependencies {
     // Spring
     implementation("org.springframework.boot:spring-boot-starter") // Удалить при добавлении хоть какой-то либы ибо они уже будут содержать этот стартер как родительский
 
+    // Eureka
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
     // Detekt
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-rules-ruleauthors:$detektVersion")
