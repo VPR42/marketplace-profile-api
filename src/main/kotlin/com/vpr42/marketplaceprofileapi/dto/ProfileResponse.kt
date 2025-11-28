@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
 import java.util.UUID
 
-data class ProfileResponse (
+data class ProfileResponse(
     val id: UUID,
     val email: String,
     val password: String,
