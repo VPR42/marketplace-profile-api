@@ -28,4 +28,16 @@ class ProfileService(
 
         return user.toProfileResponse(masterInfo, skills.map { it.skillId })
     }
+
+    fun createMasterInfo(id: UUID): ProfileResponse {
+        require(masterInfoRepository.isMasterInfoExists(id)) {
+            "Master info already exist"
+        }
+
+        val user = requireNotNull(userRepository.findById(id)) {
+            "User with $id is not exist"
+        }
+
+
+    }
 }

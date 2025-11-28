@@ -15,4 +15,11 @@ class MasterInfoRepository(
         .selectFrom(MASTERS_INFO)
         .where(MASTERS_INFO.MASTER_ID.eq(id))
         .fetchOneInto(MastersInfo::class.java)
+
+    fun isMasterInfoExists(id: UUID) = dsl
+        .fetchExists(
+            dsl.selectOne()
+                .from(MASTERS_INFO)
+                .where(MASTERS_INFO.MASTER_ID.eq(id))
+        )
 }
