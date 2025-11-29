@@ -38,4 +38,11 @@ class UserRepository(
                 .fetchOneInto(Users::class.java)
         }
     }
+
+    fun updateAvatar(id: UUID, url: String) = dsl
+        .update(USERS)
+        .set(USERS.AVATAR_PATH, url)
+        .where(USERS.ID.eq(id))
+        .returning()
+        .fetchOneInto(Users::class.java)
 }

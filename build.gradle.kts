@@ -23,6 +23,7 @@ version = "1.0.0"
 
 val detektVersion = "1.23.8"
 val jooqVersion = "3.19.2"
+val minioVersion = "8.6.0"
 
 dependencyManagement {
     imports {
@@ -50,6 +51,9 @@ dependencies {
     jooqGenerator("org.jooq:jooq-meta:$jooqVersion")
     jooqGenerator("org.jooq:jooq-meta-extensions:$jooqVersion")
     runtimeOnly("org.postgresql:postgresql")
+
+    // Minio
+    implementation("io.minio:minio:$minioVersion")
 
     // Eureka
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
