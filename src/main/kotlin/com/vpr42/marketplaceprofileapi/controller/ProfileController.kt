@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
@@ -69,7 +70,7 @@ class ProfileController(
 
     @PatchMapping("/user")
     @Operation(summary = "Запрос на изменение пользовательской информации пользователя")
-    fun createMasterInfo(
+    fun updateUserInfo(
         @RequestHeader("id") id: String,
         @RequestBody request: UserInfoUpdateRequest,
     ): ResponseEntity<ProfileInfo> {
@@ -81,7 +82,7 @@ class ProfileController(
 
     @PatchMapping("/master-info")
     @Operation(summary = "Запрос на изменение информации о пользователе как о мастере")
-    fun createMasterInfo(
+    fun updateMasterInfo(
         @RequestHeader("id") id: String,
         @RequestBody request: MasterInfoUpdateRequest,
     ): ResponseEntity<ProfileInfo> {
@@ -93,7 +94,7 @@ class ProfileController(
 
     @PatchMapping("/skills")
     @Operation(summary = "Запрос на изменение списка навыков пользователя")
-    fun createMasterInfo(
+    fun updateSkills(
         @RequestHeader("id") id: String,
         @RequestBody request: List<Int>,
     ): ResponseEntity<ProfileInfo> {
@@ -103,7 +104,7 @@ class ProfileController(
         )
     }
 
-    @PostMapping("/avatar", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    @PutMapping("/avatar", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @Operation(summary = "Запрос на загрузку аватара пользователя")
     fun uploadAvatar(
         @RequestHeader("id") id: String,
