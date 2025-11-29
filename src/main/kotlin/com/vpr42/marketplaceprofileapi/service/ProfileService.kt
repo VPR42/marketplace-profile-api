@@ -1,12 +1,14 @@
 package com.vpr42.marketplaceprofileapi.service
 
 import com.vpr42.marketplace.jooq.tables.records.MastersInfoRecord
+import com.vpr42.marketplaceprofileapi.dto.OrdersInfo
 import com.vpr42.marketplaceprofileapi.dto.ProfileInfo
 import com.vpr42.marketplaceprofileapi.dto.request.MasterInfoCreateRequest
 import com.vpr42.marketplaceprofileapi.dto.request.MasterInfoUpdateRequest
 import com.vpr42.marketplaceprofileapi.dto.request.UserInfoUpdateRequest
 import com.vpr42.marketplaceprofileapi.repository.MasterInfoRepository
 import com.vpr42.marketplaceprofileapi.repository.MasterSkillsRepository
+import com.vpr42.marketplaceprofileapi.repository.OrdersRepository
 import com.vpr42.marketplaceprofileapi.repository.UserRepository
 import com.vpr42.marketplaceprofileapi.util.toProfileInfo
 import org.slf4j.LoggerFactory
@@ -17,6 +19,7 @@ import java.util.*
 class ProfileService(
     private val userRepository: UserRepository,
     private val masterInfoRepository: MasterInfoRepository,
+    private val ordersRepository: OrdersRepository,
     private val masterSkillsRepository: MasterSkillsRepository
 ) {
     private val logger = LoggerFactory.getLogger(ProfileService::class.java)
@@ -32,7 +35,11 @@ class ProfileService(
             "Skills list shouldn't was empty"
         }
 
-        return user.toProfileInfo(masterInfo, skills.map { it.skillId })
+        return user.toProfileInfo(
+            masterInfo = masterInfo,
+            ordersInfo = getOrdersInfo(userId),
+            skills = skills.map { it.skillId }
+        )
     }
 
     fun createMasterInfo(userId: UUID, request: MasterInfoCreateRequest): ProfileInfo {
@@ -61,6 +68,7 @@ class ProfileService(
         logger.info("Master info created successfully")
         return user.toProfileInfo(
             masterInfo = masterInfo,
+            ordersInfo = getOrdersInfo(userId),
             skills = masterSkillsRepository
                 .findByMaster(userId)
                 .map { it.skillId }
@@ -75,6 +83,7 @@ class ProfileService(
         logger.info("User info updated successfully")
         return user.toProfileInfo(
             masterInfo = masterInfoRepository.findByUserId(userId),
+            ordersInfo = getOrdersInfo(userId),
             skills = masterSkillsRepository
                 .findByMaster(userId)
                 .map { it.skillId }
@@ -91,6 +100,7 @@ class ProfileService(
         logger.info("Master info updated successfully")
         return user.toProfileInfo(
             masterInfo = masterInfo,
+            ordersInfo = getOrdersInfo(userId),
             skills = masterSkillsRepository
                 .findByMaster(userId)
                 .map { it.skillId }
@@ -111,9 +121,29 @@ class ProfileService(
         logger.info("Master skills updated successfully")
         return user.toProfileInfo(
             masterInfo = masterInfoRepository.findByUserId(userId),
+            ordersInfo = getOrdersInfo(userId),
             skills = masterSkillsRepository
                 .findByMaster(userId)
                 .map { it.skillId }
         )
+    }
+
+    private fun getOrdersInfo(id: UUID): OrdersInfo {
+        val orderList = ordersRepository
+            .findByMasterId(id)
+            .filter { it.status == COMPLETED_STATUS || it.status == REJECTED_STATUS }
+
+        val completedPercent =
+            (orderList.filter { it.status == COMPLETED_STATUS }.size.toDouble() / orderList.size.toDouble()) * 100
+
+        return OrdersInfo(
+            ordersCount = orderList.size,
+            completedPercent = completedPercent.toInt()
+        )
+    }
+
+    companion object {
+        private const val COMPLETED_STATUS = "COMPLETED"
+        private const val REJECTED_STATUS = "REJECTED"
     }
 }
