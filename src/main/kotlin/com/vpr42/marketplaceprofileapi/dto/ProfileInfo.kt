@@ -17,4 +17,5 @@ data class ProfileInfo(
     @field:JsonProperty("master-info")
     val masterInfo: MasterInfo? = null,
     val skills: List<Int>,
+    val orders: OrdersInfo,
 )
