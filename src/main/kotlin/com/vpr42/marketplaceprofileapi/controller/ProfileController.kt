@@ -54,7 +54,7 @@ class ProfileController(
     fun createMasterInfo(
         @RequestHeader("id") id: String,
         @RequestBody request: MasterInfoCreateRequest,
-    ): ResponseEntity<ProfileInfo?> {
+    ): ResponseEntity<ProfileInfo> {
         logger.info("Request to create master info of user with id: $id")
         return ResponseEntity.ok(
             profileService.createMasterInfo(UUID.fromString(id), request)
@@ -66,7 +66,7 @@ class ProfileController(
     fun createMasterInfo(
         @RequestHeader("id") id: String,
         @RequestBody request: UserInfoUpdateRequest,
-    ): ResponseEntity<ProfileInfo?> {
+    ): ResponseEntity<ProfileInfo> {
         logger.info("Request to update user info of user with id: $id")
         return ResponseEntity.ok(
             profileService.updateUserInfo(UUID.fromString(id), request)
@@ -78,7 +78,7 @@ class ProfileController(
     fun createMasterInfo(
         @RequestHeader("id") id: String,
         @RequestBody request: MasterInfoUpdateRequest,
-    ): ResponseEntity<ProfileInfo?> {
+    ): ResponseEntity<ProfileInfo> {
         logger.info("Request to update master info of user with id: $id")
         return ResponseEntity.ok(
             profileService.updateMasterInfo(UUID.fromString(id), request)
@@ -90,7 +90,7 @@ class ProfileController(
     fun createMasterInfo(
         @RequestHeader("id") id: String,
         @RequestBody request: List<Int>,
-    ): ResponseEntity<ProfileInfo?> {
+    ): ResponseEntity<ProfileInfo> {
         logger.info("Request to update master skills of user with id: $id")
         return ResponseEntity.ok(
             profileService.updateSkills(UUID.fromString(id), request)
