@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
@@ -103,7 +104,7 @@ class ProfileController(
         )
     }
 
-    @PostMapping("/avatar", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    @PutMapping("/avatar", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @Operation(summary = "Запрос на загрузку аватара пользователя")
     fun uploadAvatar(
         @RequestHeader("id") id: String,

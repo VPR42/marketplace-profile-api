@@ -30,9 +30,9 @@ class AvatarService(
         val avatarUrl = minioProperties.urls.public + objectName
 
         logger.info("Save avatar of user $id with name $objectName")
-
-        logger.info("Avatar saves successfully")
         putObject(objectName, file)
+        logger.info("Avatar saves successfully")
+
         userRepository.updateAvatar(id, avatarUrl)
         logger.info("Avatar url successfully updated in database")
 
