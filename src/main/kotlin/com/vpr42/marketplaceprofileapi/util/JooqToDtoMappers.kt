@@ -3,11 +3,13 @@ package com.vpr42.marketplaceprofileapi.util
 import com.vpr42.marketplace.jooq.tables.pojos.MastersInfo
 import com.vpr42.marketplace.jooq.tables.pojos.Users
 import com.vpr42.marketplaceprofileapi.dto.MasterInfo
+import com.vpr42.marketplaceprofileapi.dto.OrdersInfo
 import com.vpr42.marketplaceprofileapi.dto.ProfileInfo
 
 fun Users.toProfileInfo(
     masterInfo: MastersInfo?,
-    skills: List<Int>
+    skills: List<Int>,
+    ordersInfo: OrdersInfo,
 ) = ProfileInfo(
     id = id,
     email = email,
@@ -19,7 +21,8 @@ fun Users.toProfileInfo(
     createdAt = createdAt,
     city = city,
     masterInfo = masterInfo?.toDto(),
-    skills = skills
+    skills = skills,
+    orders = ordersInfo,
 )
 
 fun MastersInfo.toDto() = MasterInfo(
