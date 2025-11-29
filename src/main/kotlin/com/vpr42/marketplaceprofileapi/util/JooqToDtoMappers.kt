@@ -2,9 +2,13 @@ package com.vpr42.marketplaceprofileapi.util
 
 import com.vpr42.marketplace.jooq.tables.pojos.MastersInfo
 import com.vpr42.marketplace.jooq.tables.pojos.Users
-import com.vpr42.marketplaceprofileapi.dto.ProfileResponse
+import com.vpr42.marketplaceprofileapi.dto.MasterInfo
+import com.vpr42.marketplaceprofileapi.dto.ProfileInfo
 
-fun Users.toProfileResponse(masterInfo: MastersInfo?, skills: List<Int>) = ProfileResponse(
+fun Users.toProfileInfo(
+    masterInfo: MastersInfo?,
+    skills: List<Int>
+) = ProfileInfo(
     id = id,
     email = email,
     password = password,
@@ -18,14 +22,13 @@ fun Users.toProfileResponse(masterInfo: MastersInfo?, skills: List<Int>) = Profi
     skills = skills
 )
 
-fun MastersInfo.toDto() = ProfileResponse.MasterInfo(
-    masterId = masterId,
+fun MastersInfo.toDto() = MasterInfo(
     experience = experience,
-    description = description,
-    pseudonym = pseudonym,
+    description = requireNotNull(description) { "description shouldn't be null" },
+    pseudonym = requireNotNull(pseudonym) { "pseudonym shouldn't be null" },
     phoneNumber = phoneNumber,
-    about = about,
+    about = requireNotNull(about) { "about shouldn't be null" },
     daysOfWeek = daysOfWeek,
-    startTime = startTime,
-    endTime = endTime
+    startTime = requireNotNull(startTime) { "startTime shouldn't be null" },
+    endTime = requireNotNull(endTime) { "endTime shouldn't be null" }
 )
