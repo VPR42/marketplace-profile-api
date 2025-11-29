@@ -15,7 +15,7 @@ spring:
 springdoc:
   api-docs:
     enabled: true
-    path: /api/profile/docsmp_dev_passwd
+    path: /api/profile/docs
   swagger-ui:
     csrf:
       enabled: true
