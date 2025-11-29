@@ -4,6 +4,8 @@ import com.vpr42.marketplaceprofileapi.dto.ProfileInfo
 import com.vpr42.marketplaceprofileapi.dto.request.MasterInfoCreateRequest
 import com.vpr42.marketplaceprofileapi.dto.request.MasterInfoUpdateRequest
 import com.vpr42.marketplaceprofileapi.dto.request.UserInfoUpdateRequest
+import com.vpr42.marketplaceprofileapi.dto.response.AvatarResponse
+import com.vpr42.marketplaceprofileapi.service.AvatarService
 import com.vpr42.marketplaceprofileapi.service.ProfileService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.multipart.MultipartFile
 import java.util.UUID
 
 @Controller
@@ -27,6 +31,7 @@ import java.util.UUID
 )
 class ProfileController(
     private val profileService: ProfileService,
+    private val avatarService: AvatarService,
 ) {
     private val logger = LoggerFactory.getLogger(ProfileController::class.java)
 
@@ -94,6 +99,18 @@ class ProfileController(
         logger.info("Request to update master skills of user with id: $id")
         return ResponseEntity.ok(
             profileService.updateSkills(UUID.fromString(id), request)
+        )
+    }
+
+    @PostMapping("/avatar")
+    @Operation(summary = "Запрос на загрузку аватара пользователя")
+    fun uploadAvatar(
+        @RequestHeader("id") id: String,
+        @RequestParam("file") file: MultipartFile,
+    ): ResponseEntity<AvatarResponse> {
+        logger.info("Request to upload new avatar for user $id")
+        return ResponseEntity.ok(
+            avatarService.upload(UUID.fromString(id), file)
         )
     }
 }
