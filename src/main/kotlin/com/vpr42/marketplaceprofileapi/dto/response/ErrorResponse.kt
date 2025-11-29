@@ -1,4 +1,4 @@
-package com.vpr42.marketplaceprofileapi.dto
+package com.vpr42.marketplaceprofileapi.dto.response
 
 data class ErrorResponse(
     val status: String,

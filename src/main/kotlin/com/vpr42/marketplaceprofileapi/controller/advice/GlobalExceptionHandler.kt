@@ -1,6 +1,6 @@
 package com.vpr42.marketplaceprofileapi.controller.advice
 
-import com.vpr42.marketplaceprofileapi.dto.ErrorResponse
+import com.vpr42.marketplaceprofileapi.dto.response.ErrorResponse
 import io.swagger.v3.oas.annotations.Hidden
 import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.LoggerFactory
