@@ -69,7 +69,7 @@ class ProfileController(
 
     @PatchMapping("/user")
     @Operation(summary = "Запрос на изменение пользовательской информации пользователя")
-    fun createMasterInfo(
+    fun updateUserInfo(
         @RequestHeader("id") id: String,
         @RequestBody request: UserInfoUpdateRequest,
     ): ResponseEntity<ProfileInfo> {
@@ -81,7 +81,7 @@ class ProfileController(
 
     @PatchMapping("/master-info")
     @Operation(summary = "Запрос на изменение информации о пользователе как о мастере")
-    fun createMasterInfo(
+    fun updateMasterInfo(
         @RequestHeader("id") id: String,
         @RequestBody request: MasterInfoUpdateRequest,
     ): ResponseEntity<ProfileInfo> {
@@ -93,7 +93,7 @@ class ProfileController(
 
     @PatchMapping("/skills")
     @Operation(summary = "Запрос на изменение списка навыков пользователя")
-    fun createMasterInfo(
+    fun updateSkills(
         @RequestHeader("id") id: String,
         @RequestBody request: List<Int>,
     ): ResponseEntity<ProfileInfo> {
