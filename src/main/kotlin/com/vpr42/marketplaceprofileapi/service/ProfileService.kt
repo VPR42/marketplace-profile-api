@@ -43,7 +43,7 @@ class ProfileService(
     }
 
     fun createMasterInfo(userId: UUID, request: MasterInfoCreateRequest): ProfileInfo {
-        require(masterInfoRepository.isMasterInfoExists(userId)) { "Master info already exist" }
+        require(!masterInfoRepository.isMasterInfoExists(userId)) { "Master info already exist" }
         requireNotNull(request.masterInfo.daysOfWeek) { "daysOfWeek shouldn't be null" }
         val user = requireNotNull(userRepository.findById(userId)) { "User with $userId is not exist" }
 
