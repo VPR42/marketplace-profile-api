@@ -12,7 +12,7 @@ class SkillsService(
     fun getAll(): List<Skills> {
         val result = skillsRepository.findAll()
 
-        require(result.isEmpty()) {
+        require(result.isNotEmpty()) {
             "Skills in database not found"
         }
 
