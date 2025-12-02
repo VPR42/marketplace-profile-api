@@ -13,7 +13,6 @@ fun Users.toProfileInfo(
 ) = ProfileInfo(
     id = id,
     email = email,
-    password = password,
     surname = surname,
     name = name,
     patronymic = patronymic,
@@ -31,7 +30,7 @@ fun MastersInfo.toDto() = MasterInfo(
     pseudonym = requireNotNull(pseudonym) { "pseudonym shouldn't be null" },
     phoneNumber = phoneNumber,
     about = requireNotNull(about) { "about shouldn't be null" },
-    daysOfWeek = daysOfWeek,
+    daysOfWeek = daysOfWeek?.apply { this.sort() } ?: arrayOf(),
     startTime = requireNotNull(startTime) { "startTime shouldn't be null" },
     endTime = requireNotNull(endTime) { "endTime shouldn't be null" }
 )

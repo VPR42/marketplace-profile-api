@@ -6,7 +6,7 @@ data class MasterInfo(
     val pseudonym: String,
     val phoneNumber: String,
     val about: String,
-    val daysOfWeek: Array<Int?>?,
+    val daysOfWeek: Array<Int?>,
     val startTime: String,
     val endTime: String
 ) {
@@ -34,7 +34,7 @@ data class MasterInfo(
         result = 31 * result + pseudonym.hashCode()
         result = 31 * result + phoneNumber.hashCode()
         result = 31 * result + about.hashCode()
-        result = 31 * result + (daysOfWeek?.contentHashCode() ?: 0)
+        result = 31 * result + (daysOfWeek.contentHashCode())
         result = 31 * result + startTime.hashCode()
         result = 31 * result + endTime.hashCode()
         return result

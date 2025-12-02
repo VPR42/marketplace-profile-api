@@ -6,7 +6,6 @@ import java.util.*
 data class ProfileInfo(
     val id: UUID,
     val email: String,
-    val password: String,
     val surname: String,
     val name: String,
     val patronymic: String,
